@@ -1,5 +1,6 @@
 package com.ecoverde.estateagency.init;
 
+import com.ecoverde.estateagency.service.BlogService;
 import com.ecoverde.estateagency.service.PropertyService;
 import com.ecoverde.estateagency.service.RoleService;
 import com.ecoverde.estateagency.service.UserService;
@@ -12,12 +13,14 @@ public class DataInit implements CommandLineRunner {
     private final UserService userService;
     private final RoleService roleService;
     private final PropertyService propertyService;
+    private final BlogService blogService;
 
     @Autowired
-    public DataInit(UserService userService, RoleService roleService, PropertyService propertyService) {
+    public DataInit(UserService userService, RoleService roleService, PropertyService propertyService, BlogService blogService) {
         this.userService = userService;
         this.roleService = roleService;
         this.propertyService = propertyService;
+        this.blogService = blogService;
     }
 
     @Override
@@ -25,5 +28,6 @@ public class DataInit implements CommandLineRunner {
            this.roleService.rolesInit();
            this.userService.usersInit();
            this.propertyService.propertiesInit();
+           this.blogService.blogsInit();
     }
 }

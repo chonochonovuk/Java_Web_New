@@ -8,6 +8,9 @@ public class UserServiceModel extends BaseServiceModel{
     private String password;
     private boolean enabled;
     private Set<RoleServiceModel> authorities;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
     private String phoneNumber;
     private String firstName;
     private String lastName;
@@ -45,6 +48,30 @@ public class UserServiceModel extends BaseServiceModel{
 
     public void setAuthorities(Set<RoleServiceModel> authorities) {
         this.authorities = authorities;
+    }
+
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
     }
 
     public String getPhoneNumber() {

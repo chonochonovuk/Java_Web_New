@@ -86,7 +86,38 @@ public class UserServiceImpl implements UserService {
     @Override
     public void userSetRole(String username, String authority) {
        UserServiceModel usm = this.findByUsername(username);
-       
+       usm.getAuthorities().clear();
+        switch (authority) {
+            case "ROLE_USER" -> usm.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
+            case "ROLE_OWNER" -> {
+                usm.getAuthorities().add(this.roleService.findByAuthority("ROLE_OWNER"));
+            }
+            case "ROLE_AGENT" -> {
+                usm.getAuthorities().add(this.roleService.findByAuthority("ROLE_AGENT"));
+            }
+            case "ROLE_MODERATOR" -> {
+                usm.getAuthorities().add(this.roleService.findByAuthority("ROLE_MODERATOR"));
+            }
+            case "ROLE_ADMIN" -> {
+                usm.getAuthorities().add(this.roleService.findByAuthority("ROLE_ADMIN"));
+            }
+        }
+       this.userRepository.saveAndFlush(this.modelMapper.map(usm,User.class));
+    }
+
+    @Override
+    public void changeUserStatus(String username, String status) {
+        UserServiceModel usm = this.findByUsername(username);
+        switch (status) {
+            case "ENABLED" -> {
+                usm.setEnabled(true);
+                usm.setAccountNonExpired(true);
+                usm.setAccountNonLocked(true);
+                usm.setCredentialsNonExpired(true);
+            }
+            case "DISABLED" -> usm.setEnabled(false);
+        }
+        this.userRepository.saveAndFlush(this.modelMapper.map(usm,User.class));
     }
 
 

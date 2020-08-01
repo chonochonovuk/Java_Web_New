@@ -16,5 +16,7 @@ public interface UserService extends UserDetailsService {
 
     void userSetRole(String username,String authority);
 
+    void changeUserStatus(String username, String status);
+
     void usersInit();
 }

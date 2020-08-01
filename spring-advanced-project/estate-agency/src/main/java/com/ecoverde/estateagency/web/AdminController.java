@@ -10,18 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
     private final UserService userService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public AdminController(UserService userService, ModelMapper modelMapper) {
+    public AdminController(UserService userService) {
         this.userService = userService;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/manage-users")
@@ -33,31 +32,57 @@ public class AdminController {
 
     @PostMapping("/set-role-user/{username}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String setRoleUser(@PathVariable String username, Model model){
-        return "admin";
+    public ModelAndView setRoleUser(@PathVariable String username, ModelAndView modelAndView){
+        this.userService.userSetRole(username,"ROLE_USER");
+        modelAndView.setViewName("redirect:/admin/manage-users");
+        return modelAndView;
     }
 
     @PostMapping("/set-role-admin/{username}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String setRoleAdmin(@PathVariable String username, Model model){
-        return "admin";
+    public ModelAndView setRoleAdmin(@PathVariable String username, ModelAndView modelAndView){
+        this.userService.userSetRole(username,"ROLE_ADMIN");
+        modelAndView.setViewName("redirect:/admin/manage-users");
+        return modelAndView;
     }
 
     @PostMapping("/set-role-agent/{username}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String setRoleAgent(@PathVariable String username, Model model){
-        return "admin";
+    public ModelAndView setRoleAgent(@PathVariable String username, ModelAndView modelAndView){
+        this.userService.userSetRole(username,"ROLE_AGENT");
+        modelAndView.setViewName("redirect:/admin/manage-users");
+        return modelAndView;
     }
 
     @PostMapping("/set-role-moderator/{username}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String setRoleModerator(@PathVariable String username, Model model){
-        return "admin";
+    public ModelAndView setRoleModerator(@PathVariable String username, ModelAndView modelAndView){
+        this.userService.userSetRole(username,"ROLE_MODERATOR");
+        modelAndView.setViewName("redirect:/admin/manage-users");
+        return modelAndView;
     }
 
     @PostMapping("/set-role-owner/{username}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String setRoleOwner(@PathVariable String username, Model model){
-        return "admin";
+    public ModelAndView setRoleOwner(@PathVariable String username, ModelAndView modelAndView){
+        this.userService.userSetRole(username,"ROLE_OWNER");
+        modelAndView.setViewName("redirect:/admin/manage-users");
+        return modelAndView;
+    }
+
+    @PostMapping("/change-status-enabled/{username}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ModelAndView changeUserStatusEnabled(@PathVariable String username, ModelAndView modelAndView){
+        this.userService.changeUserStatus(username,"ENABLED");
+        modelAndView.setViewName("redirect:/admin/manage-users");
+        return modelAndView;
+    }
+
+    @PostMapping("/change-status-disabled/{username}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ModelAndView changeUserStatusDisabled(@PathVariable String username, ModelAndView modelAndView){
+        this.userService.changeUserStatus(username,"DISABLED");
+        modelAndView.setViewName("redirect:/admin/manage-users");
+        return modelAndView;
     }
 }

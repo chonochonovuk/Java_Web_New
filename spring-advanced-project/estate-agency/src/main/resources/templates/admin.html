@@ -42,12 +42,12 @@
             <td th:text="${user.enabled} ? 'Enabled' : 'Disabled'" class="col-md-2">Status</td>
             <td class="col-md-2"><div class="row">
                 <th:block th:if="${user.enabled}">
-                    <form th:action="@{/admin/change-status-disabled/{id}(id=${user.id})}" method="POST">
+                    <form th:action="@{/admin/change-status-disabled/{username}(username=${user.username})}" method="POST">
                         <button class="btn btn-success">DISABLED</button>
                     </form>
                 </th:block>
                 <th:block th:unless="${user.enabled}">
-                    <form th:action="@{/admin/change-status-enabled/{id}(id=${user.id})}" method="POST">
+                    <form th:action="@{/admin/change-status-enabled/{username}(username=${user.username})}" method="POST">
                         <button class="btn btn-success">ENABLED</button>
                     </form>
                 </th:block>
@@ -60,7 +60,7 @@
                       <button class="btn btn-success">USER</button>
                   </form>
               </th:block>
-                <th:block th:if="${!#strings.contains(user.authorities,'ROLE_AMIN')}">
+                <th:block th:if="${!#strings.contains(user.authorities,'ROLE_ADMIN')}">
                     <form th:action="@{/admin/set-role-admin/{username}(username=${user.username})}" method="POST">
                         <button class="btn btn-success">ADMIN</button>
                     </form>
