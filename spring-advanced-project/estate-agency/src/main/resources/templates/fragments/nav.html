@@ -12,39 +12,9 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a th:href="@{/users/profile}" class="nav-link" th:text="${#authentication.getName()}">User</a></li>
-                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                        <li class="nav-item select-wrap mr-2">
-                            <div class="dropdown mt-1">
-                                <a class="nav-link dropdown-toggle text-white" href="#" role="button" id="adminDropdown"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
-                                <div class="dropdown-menu bg-dark" aria-labelledby="adminDropdown">
-                                    <a class="dropdown-item text-white bg-dark" th:href="@{/admin/manage-users}">Manage Users!</a>
-                                </div>
-                            </div>
-                        </li>
-                    </th:block>
-                    <th:block sec:authorize="hasRole('ROLE_MODERATOR')">
-                        <li class="nav-item select-wrap mr-2">
-                            <div class="dropdown mt-1">
-                                <a class="nav-link active dropdown-toggle text-white" href="#" role="button" id="moderatorDropdown"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Moderator</a>
-                                <div class="dropdown-menu bg-dark" aria-labelledby="moderatorDropdown">
-                                    <a class="dropdown-item text-white bg-dark" th:href="@{/blog/all}">All Blogs</a>
-                                </div>
-                            </div>
-                        </li>
-                    </th:block>
-                    <th:block sec:authorize="hasRole('ROLE_AGENT')">
-                        <li class="nav-item select-wrap mr-2">
-                            <div class="dropdown mt-1">
-                                <a class="nav-link text-white dropdown-toggle" href="#" role="button" id="agentDropdown"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Agent</a>
-                                <div class="dropdown-menu bg-dark" aria-labelledby="agentDropdown">
-                                    <a class="dropdown-item text-white bg-dark" th:href="@{/property/add}">Add Property</a>
-                                </div>
-                            </div>
-                        </li>
-                    </th:block>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item active"><a class="nav-link" th:href="@{/admin/manage-users}">Admin</a></li>
+                    <li sec:authorize="hasRole('ROLE_MODERATOR')" class="nav-item active"><a class="nav-link" th:href="@{/blog}">Moderator</a></li>
+                    <li sec:authorize="hasRole('ROLE_AGENT')"class="nav-item active"><a class="nav-link" th:href="@{/property/add}">Add Property</a></li>
                     <li class="nav-item active"><a href="properties.html" class="nav-link">Properties</a></li>
                     <li class="nav-item"><a th:href="@{/blog}" class="nav-link">Blog</a></li>
                     <li class="nav-item">

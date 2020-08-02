@@ -11,6 +11,8 @@ public class BlogServiceModel extends BaseServiceModel{
     private LocalDate createdAt;
     private String content;
     private Set<BlogCommentServiceModel> comments;
+    private boolean isArchived;
+    private boolean isLockForComments;
 
     public BlogServiceModel() {
     }
@@ -53,5 +55,21 @@ public class BlogServiceModel extends BaseServiceModel{
 
     public void setComments(Set<BlogCommentServiceModel> comments) {
         this.comments = comments;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
+
+    public boolean isLockForComments() {
+        return isLockForComments;
+    }
+
+    public void setLockForComments(boolean lockForComments) {
+        isLockForComments = lockForComments;
     }
 }

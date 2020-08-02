@@ -12,6 +12,8 @@ public class Blog extends BaseEntity {
     private LocalDate createdAt;
     private String content;
     private Set<BlogComment> comments;
+    private boolean isArchived;
+    private boolean isLockForComments;
 
     public Blog() {
     }
@@ -59,5 +61,23 @@ public class Blog extends BaseEntity {
 
     public void setComments(Set<BlogComment> comments) {
         this.comments = comments;
+    }
+
+    @Column(name = "isArchived", nullable = false)
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
+
+    @Column(name = "isLockForComments",nullable = false)
+    public boolean isLockForComments() {
+        return isLockForComments;
+    }
+
+    public void setLockForComments(boolean lockForComments) {
+        isLockForComments = lockForComments;
     }
 }

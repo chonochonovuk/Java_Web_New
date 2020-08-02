@@ -1,7 +1,6 @@
 package com.ecoverde.estateagency.web;
 
 import com.ecoverde.estateagency.service.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

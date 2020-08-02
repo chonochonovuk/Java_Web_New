@@ -14,4 +14,8 @@ public interface BlogService {
 
     BlogServiceModel findByTitle(String title);
 
+    void changeBlogStatus(String title, String status);
+
+    void addBlogComment(String blogTitle, String blogCommentTitle);
+
 }

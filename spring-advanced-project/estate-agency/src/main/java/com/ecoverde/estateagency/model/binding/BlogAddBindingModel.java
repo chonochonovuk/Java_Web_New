@@ -1,16 +1,19 @@
-package com.ecoverde.estateagency.model.service;
+package com.ecoverde.estateagency.model.binding;
 
-import com.ecoverde.estateagency.model.entity.User;
+import com.ecoverde.estateagency.model.entity.BlogComment;
+import com.ecoverde.estateagency.model.service.UserServiceModel;
+import org.hibernate.validator.constraints.Length;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.Set;
 
-public class PostServiceModel extends BaseServiceModel{
+public class BlogAddBindingModel {
     private UserServiceModel author;
     private String title;
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
     private String content;
 
-    public PostServiceModel() {
+    public BlogAddBindingModel() {
     }
 
     public UserServiceModel getAuthor() {
@@ -21,6 +24,7 @@ public class PostServiceModel extends BaseServiceModel{
         this.author = author;
     }
 
+    @Length(min = 6, message = "Minimum 6 characters length")
     public String getTitle() {
         return title;
     }
@@ -29,14 +33,15 @@ public class PostServiceModel extends BaseServiceModel{
         this.title = title;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
+    @Length(min = 30, message = "Minimum 30 characters length")
     public String getContent() {
         return content;
     }
@@ -44,4 +49,5 @@ public class PostServiceModel extends BaseServiceModel{
     public void setContent(String content) {
         this.content = content;
     }
+
 }
