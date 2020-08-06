@@ -11,10 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 @RestController
+@CrossOrigin(origins = "/property")
 @RequestMapping("/search")
 public class SearchController {
     private final PropertyService propertyService;
@@ -33,23 +34,16 @@ public class SearchController {
    @PostMapping
     public ResponseEntity<AjaxResponseBody> getSearchResultWithAjax(@RequestBody PropertySearchModel propertySearchModel){
         AjaxResponseBody result = new AjaxResponseBody();
-        List<PropertyViewModel> findProperty = new ArrayList<>();
-        if (propertySearchModel.getKeyword().isEmpty()){
-           findProperty = this.propertyService.findAllProperties();
-        }
-
-
-       if (!propertySearchModel.getKeyword().isEmpty()){
-           findProperty = this.propertyService.findByKeyword(propertySearchModel.getKeyword());
-        }
-
+        Set<PropertyViewModel> findProperty = this.propertyService.findAllProperties(propertySearchModel);
 
        if (findProperty.isEmpty()){
-          result.setMessage("Property Not Found!!!");
+          result.setMessage("No matching results!!!");
        }else {
            result.setMessage("Success");
            result.setResult(findProperty);
        }
         return ResponseEntity.ok(result);
    }
+
+
 }
